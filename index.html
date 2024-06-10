@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SP-NSPP</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="css/bulma-slider.min.css">
+  <link rel="stylesheet" href="css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="js/fontawesome.all.min.js"></script>
+  <script src="js/bulma-carousel.min.js"></script>
+  <script src="js/bulma-slider.min.js"></script>
+  <script src="js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Stage-Wise and Prior-Aware Neural Speech Phase Prediction with Phase Adversarial Training</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <center>Anonymous submission to SLT 2024 </center>
+              <!-- <span class="author-block">
+                <a>Ye-Xin Lu</a>,</span>
+              <span class="author-block">
+                <a href="http://staff.ustc.edu.cn/~yangai" target="_blank">Yang Ai</a>,</span>
+              <span class="author-block">
+                <a>Zheng-Yan Sheng</a>,</span>
+              <span class="author-block">
+                <a href="http://staff.ustc.edu.cn/~zhling" target="_blank">Zhen-Hua Ling</a>,</span> -->
+            </div>
+
+            <!-- <div class="is-size-5 publication-authors">
+              <span class="author-block">National Engineering Research Center of Speech and Language Information Processing <br> University of Science and Technology of China<br></span>
+            </div> -->
+
+            <!-- <div class="column has-text-centered">
+              <div class="publication-links"> -->
+                <!--                   Code Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://github.com/yxlu-0102/AP-BWE" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+                </span> -->
+                <!--                   ArXiv Link -->
+                <!-- <span class="link-block">
+                  <a href="" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                  </a>
+                </span>
+              </div>
+            </div> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper proposes a novel Stage-wise and Prior-aware Neural Speech Phase Prediction (SP-NSPP) model, which predicts the phase spectrum from input amplitude spectrum by two-stage neural networks. 
+            In the initial prior-construction stage, we preliminarily predict a prior phase spectrum with coarse quality from the amplitude spectrum. 
+            The subsequent refinement stage transforms the amplitude spectrum into a refined and high-quality phase spectrum conditioned on the prior phase. 
+            Networks in both stages use ConvNeXt v2 blocks as the backbone and adopt adversarial training for phase by innovatively introducing a phase spectrum discriminator (PSD). 
+            To further improve the continuity of the refined phase, we also incorporate the time-frequency intergrated difference (TFID) loss in the refinement stage. 
+            Experimental results confirm that, compared to iterative phase estimation algorithms, our proposed SP-NSPP does not require multiple rounds of staged iterations, resulting in higher generation efficiency. 
+            Compared to neural network-based no-prior phase prediction methods, the proposed SP-NSPP achieves higher phase prediction accuracy, thanks to the introduction of the coarse phase priors and diverse training criteria.  
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<br>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">I. Analysis-synthesis tasks on different methods with sampling rate of 16kHz</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h3 class="title is-5">Sample 1</h3>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>GLA</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>vMDNN</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+      <!-- <td style="text-align: center;"><b>MS-BWE (Four Stages)</b></th> -->
+    </tr>
+
+    <!-- <tr>
+    <td><img src="samples/BWE_flexible/8kto48k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/nuwave2.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/udm+.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/mdctgan.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr> -->
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/natural/p232_001.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/GLA/p232_001.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/RAAR/p232_001.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/vMDNN/p232_001.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/NSPP/p232_001.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/SP-NSPP/p232_001.wav" type="audio/wav"></audio></td>
+    <!-- <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/ms-bwe.wav" type="audio/wav"></audio></td> -->
+    </tr>
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h3 class="title is-5">Sample 2</h3>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+    <!-- <tr>
+      <td><img src="samples/BWE_flexible/12kto48k/wideband.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/sinc.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/nuwave2.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/udm+.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/mdctgan.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/ap-bwe.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/ms-bwe.png" width="200px" height="128px"></td>
+      </tr> -->
+  
+      <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/natural/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/GLA/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/RAAR/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/vMDNN/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/NSPP/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/SP-NSPP/p232_003.wav" type="audio/wav"></audio></td>
+      </tr>
+    </table>
+    <br>
+    <table align = "center" style="text-align: center;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-centered">
+            <h2 class="title is-5">Sample 3</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+      </tr>
+      <!-- <tr>
+        <td><img src="samples/BWE_flexible/16kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/nuwave2.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/udm+.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/mdctgan.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/ap-bwe.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/ms-bwe.png" width="200px" height="128px"></td>
+        </tr> -->
+    
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/natural/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/GLA/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/RAAR/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/vMDNN/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/NSPP/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/SP-NSPP/p232_007.wav" type="audio/wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 4</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+            <td style="text-align: center;"><b>Natural</b></th>
+            <td style="text-align: center;"><b>GLA</b></th>
+            <td style="text-align: center;"><b>RAAR</b></th>
+            <td style="text-align: center;"><b>vMDNN</b></th>
+            <td style="text-align: center;"><b>NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+        </tr>
+        <!-- <tr>
+        <td><img src="samples/BWE_flexible/24kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/nuwave2.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/udm+.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/mdctgan.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ap-bwe.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ms-bwe.png" width="200px" height="128px"></td>
+        </tr> -->
+    
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/natural/p257_011.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/GLA/p257_011.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/RAAR/p257_011.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/vMDNN/p257_011.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/NSPP/p257_011.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/SP-NSPP/p257_011.wav" type="audio/wav"></audio></td>
+        </tr>
+  </table>
+  <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 5</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+            <td style="text-align: center;"><b>Natural</b></th>
+            <td style="text-align: center;"><b>GLA</b></th>
+            <td style="text-align: center;"><b>RAAR</b></th>
+            <td style="text-align: center;"><b>vMDNN</b></th>
+            <td style="text-align: center;"><b>NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+        </tr>
+        <!-- <tr>
+        <td><img src="samples/BWE_flexible/24kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/nuwave2.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/udm+.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/mdctgan.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ap-bwe.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ms-bwe.png" width="200px" height="128px"></td>
+        </tr> -->
+    
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/natural/p257_281.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/GLA/p257_281.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/RAAR/p257_281.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/vMDNN/p257_281.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/NSPP/p257_281.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/SP-NSPP/p257_281.wav" type="audio/wav"></audio></td>
+        </tr>
+  </table>
+  <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 6</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+            <td style="text-align: center;"><b>Natural</b></th>
+            <td style="text-align: center;"><b>GLA</b></th>
+            <td style="text-align: center;"><b>RAAR</b></th>
+            <td style="text-align: center;"><b>vMDNN</b></th>
+            <td style="text-align: center;"><b>NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+        </tr>
+        <!-- <tr>
+        <td><img src="samples/BWE_flexible/24kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/nuwave2.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/udm+.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/mdctgan.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ap-bwe.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ms-bwe.png" width="200px" height="128px"></td>
+        </tr> -->
+    
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/natural/p257_284.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/GLA/p257_284.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/RAAR/p257_284.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/vMDNN/p257_284.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/NSPP/p257_284.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/SP-NSPP/p257_284.wav" type="audio/wav"></audio></td>
+        </tr>
+  </table>
+  <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 7</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+            <td style="text-align: center;"><b>Natural</b></th>
+            <td style="text-align: center;"><b>GLA</b></th>
+            <td style="text-align: center;"><b>RAAR</b></th>
+            <td style="text-align: center;"><b>vMDNN</b></th>
+            <td style="text-align: center;"><b>NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+        </tr>
+        <!-- <tr>
+        <td><img src="samples/BWE_flexible/24kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/nuwave2.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/udm+.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/mdctgan.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ap-bwe.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ms-bwe.png" width="200px" height="128px"></td>
+        </tr> -->
+    
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/natural/p257_287.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/GLA/p257_287.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/RAAR/p257_287.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/vMDNN/p257_287.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/NSPP/p257_287.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab1/SP-NSPP/p257_287.wav" type="audio/wav"></audio></td>
+        </tr>
+  </table>
+</section>
+
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">II. Prediction-synthesis tasks on different methods with sampling rate of 16kHz</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 1</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/natural/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/GLA/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/RAAR/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/vMDNN/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/NSPP/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/SP-NSPP/p232_001.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 2</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/natural/p232_003.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/GLA/p232_003.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/RAAR/p232_003.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/vMDNN/p232_003.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/NSPP/p232_003.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/SP-NSPP/p232_003.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 3</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/natural/p232_007.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/GLA/p232_007.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/RAAR/p232_007.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/vMDNN/p232_007.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/NSPP/p232_007.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/SP-NSPP/p232_007.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 4</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/natural/p257_011.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/GLA/p257_011.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/RAAR/p257_011.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/vMDNN/p257_011.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/NSPP/p257_011.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/SP-NSPP/p257_011.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  </table>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 5</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/natural/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/GLA/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/RAAR/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/vMDNN/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/NSPP/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/SP-NSPP/p257_281.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  </table>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 6</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/natural/p257_284.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/GLA/p257_284.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/RAAR/p257_284.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/vMDNN/p257_284.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/NSPP/p257_284.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/SP-NSPP/p257_284.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 7</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>GLA</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>vMDNN</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/natural/p257_287.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/GLA/p257_287.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/RAAR/p257_287.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/vMDNN/p257_287.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/NSPP/p257_287.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab2/SP-NSPP/p257_287.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+</section>
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">III. Analysis-synthesis task on SP-NSPP and its ablated variants with sampling rate of 16kHz</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 1</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o RS</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o PSD</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o TFID</b></th>
+    </tr>
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo RS/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo PSD/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo TFID/p232_001.wav" type="audio/wav"></audio></td>
+      </tr>
+    </table>
+    <br>
+    <table align = "center" style="text-align: center;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-centered">
+            <h2 class="title is-5">Sample 2</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <tr>
+          <td style="text-align: center;"><b>SP-NSPP</b></th>
+          <td style="text-align: center;"><b>SP-NSPP w/o RS</b></th>
+          <td style="text-align: center;"><b>SP-NSPP w/o PSD</b></th>
+          <td style="text-align: center;"><b>SP-NSPP w/o TFID</b></th>
+      </tr>
+      <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo RS/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo PSD/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo TFID/p232_003.wav" type="audio/wav"></audio></td>
+      </tr>
+      </table>
+      <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 3</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP w/o RS</b></th>
+            <td style="text-align: center;"><b>SP-NSPP w/o PSD</b></th>
+            <td style="text-align: center;"><b>SP-NSPP w/o TFID</b></th>
+        </tr>
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo RS/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo PSD/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo TFID/p232_007.wav" type="audio/wav"></audio></td>
+        </tr>
+        </table>
+        <br>
+        <table align = "center" style="text-align: center;">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-centered">
+                <h2 class="title is-5">Sample 4</h2>
+              </div>
+            </div>
+          </div>
+          <br>
+          <tr>
+              <td style="text-align: center;"><b>SP-NSPP</b></th>
+              <td style="text-align: center;"><b>SP-NSPP w/o RS</b></th>
+              <td style="text-align: center;"><b>SP-NSPP w/o PSD</b></th>
+              <td style="text-align: center;"><b>SP-NSPP w/o TFID</b></th>
+          </tr>     
+          <tr>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo RS/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo PSD/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo TFID/p257_011.wav" type="audio/wav"></audio></td>
+          </tr>
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 5</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP w/o RS</b></th>
+        <td style="text-align: center;"><b>SP-NSPP w/o PSD</b></th>
+        <td style="text-align: center;"><b>SP-NSPP w/o TFID</b></th>
+    </tr>     
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo RS/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo PSD/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo TFID/p257_281.wav" type="audio/wav"></audio></td>
+    </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 6</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o RS</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o PSD</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o TFID</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo RS/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo PSD/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo TFID/p257_284.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 7</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o RS</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o PSD</b></th>
+      <td style="text-align: center;"><b>SP-NSPP w/o TFID</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo RS/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo PSD/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab3/SP-NSPP wo TFID/p257_287.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+</section>
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">IV. Analysis-synthesis task on different methods with sampling rate of 24kHz</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 1</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 24k/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 24k/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 24k/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 24k/p232_001.wav" type="audio/wav"></audio></td>
+      </tr>
+    </table>
+    <br>
+    <table align = "center" style="text-align: center;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-centered">
+            <h2 class="title is-5">Sample 2</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+          <td style="text-align: center;"><b>RAAR</b></th>
+          <td style="text-align: center;"><b>NSPP</b></th>
+          <td style="text-align: center;"><b>SP-NSPP</b></th>
+      </tr>
+      <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 24k/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 24k/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 24k/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 24k/p232_003.wav" type="audio/wav"></audio></td>
+      </tr>
+      </table>
+      <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 3</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+          <td style="text-align: center;"><b>Natural</b></th>
+            <td style="text-align: center;"><b>RAAR</b></th>
+            <td style="text-align: center;"><b>NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+        </tr>
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 24k/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 24k/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 24k/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 24k/p232_007.wav" type="audio/wav"></audio></td>
+        </tr>
+        </table>
+        <br>
+        <table align = "center" style="text-align: center;">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-centered">
+                <h2 class="title is-5">Sample 4</h2>
+              </div>
+            </div>
+          </div>
+          <br>
+          <tr>
+            <td style="text-align: center;"><b>Natural</b></th>
+              <td style="text-align: center;"><b>RAAR</b></th>
+              <td style="text-align: center;"><b>NSPP</b></th>
+              <td style="text-align: center;"><b>SP-NSPP</b></th>
+          </tr>     
+          <tr>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 24k/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 24k/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 24k/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 24k/p257_011.wav" type="audio/wav"></audio></td>
+          </tr>
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 5</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>     
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 24k/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 24k/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 24k/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 24k/p257_281.wav" type="audio/wav"></audio></td>
+    </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 6</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+    <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 24k/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 24k/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 24k/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 24k/p257_284.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 7</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+    <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 24k/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 24k/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 24k/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 24k/p257_287.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+</section>
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">V. Analysis-synthesis task on different methods with sampling rate of 48kHz</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 1</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 48k/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 48k/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 48k/p232_001.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 48k/p232_001.wav" type="audio/wav"></audio></td>
+      </tr>
+    </table>
+    <br>
+    <table align = "center" style="text-align: center;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-centered">
+            <h2 class="title is-5">Sample 2</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+          <td style="text-align: center;"><b>RAAR</b></th>
+          <td style="text-align: center;"><b>NSPP</b></th>
+          <td style="text-align: center;"><b>SP-NSPP</b></th>
+      </tr>
+      <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 48k/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 48k/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 48k/p232_003.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 48k/p232_003.wav" type="audio/wav"></audio></td>
+      </tr>
+      </table>
+      <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 3</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+          <td style="text-align: center;"><b>Natural</b></th>
+            <td style="text-align: center;"><b>RAAR</b></th>
+            <td style="text-align: center;"><b>NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+        </tr>
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 48k/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 48k/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 48k/p232_007.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 48k/p232_007.wav" type="audio/wav"></audio></td>
+        </tr>
+        </table>
+        <br>
+        <table align = "center" style="text-align: center;">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-centered">
+                <h2 class="title is-5">Sample 4</h2>
+              </div>
+            </div>
+          </div>
+          <br>
+          <tr>
+            <td style="text-align: center;"><b>Natural</b></th>
+              <td style="text-align: center;"><b>RAAR</b></th>
+              <td style="text-align: center;"><b>NSPP</b></th>
+              <td style="text-align: center;"><b>SP-NSPP</b></th>
+          </tr>     
+          <tr>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 48k/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 48k/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 48k/p257_011.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 48k/p257_011.wav" type="audio/wav"></audio></td>
+          </tr>
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 5</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>     
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 48k/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 48k/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 48k/p257_281.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 48k/p257_281.wav" type="audio/wav"></audio></td>
+    </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 6</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+    <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 48k/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 48k/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 48k/p257_284.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 48k/p257_284.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 7</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+    <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural 48k/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR 48k/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP 48k/p257_287.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP 48k/p257_287.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+</section>
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">VI. Analysis-synthesis task on different methods for the FSD50k with sampling rate of 44.1kHz</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 1</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural audio/209.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR audio/209.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP audio/209.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP audio/209.wav" type="audio/wav"></audio></td>
+      </tr>
+    </table>
+    <br>
+    <table align = "center" style="text-align: center;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-centered">
+            <h2 class="title is-5">Sample 2</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <tr>
+        <td style="text-align: center;"><b>Natural</b></th>
+          <td style="text-align: center;"><b>RAAR</b></th>
+          <td style="text-align: center;"><b>NSPP</b></th>
+          <td style="text-align: center;"><b>SP-NSPP</b></th>
+      </tr>
+      <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural audio/529.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR audio/529.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP audio/529.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP audio/529.wav" type="audio/wav"></audio></td>
+      </tr>
+      </table>
+      <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">Sample 3</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+          <td style="text-align: center;"><b>Natural</b></th>
+            <td style="text-align: center;"><b>RAAR</b></th>
+            <td style="text-align: center;"><b>NSPP</b></th>
+            <td style="text-align: center;"><b>SP-NSPP</b></th>
+        </tr>
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural audio/980.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR audio/980.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP audio/980.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP audio/980.wav" type="audio/wav"></audio></td>
+        </tr>
+        </table>
+        <br>
+        <table align = "center" style="text-align: center;">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-centered">
+                <h2 class="title is-5">Sample 4</h2>
+              </div>
+            </div>
+          </div>
+          <br>
+          <tr>
+            <td style="text-align: center;"><b>Natural</b></th>
+              <td style="text-align: center;"><b>RAAR</b></th>
+              <td style="text-align: center;"><b>NSPP</b></th>
+              <td style="text-align: center;"><b>SP-NSPP</b></th>
+          </tr>     
+          <tr>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural audio/1377.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR audio/1377.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP audio/1377.wav" type="audio/wav"></audio></td>
+            <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP audio/1377.wav" type="audio/wav"></audio></td>
+          </tr>
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">Sample 5</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+        <td style="text-align: center;"><b>RAAR</b></th>
+        <td style="text-align: center;"><b>NSPP</b></th>
+        <td style="text-align: center;"><b>SP-NSPP</b></th>
+    </tr>     
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural audio/1405.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR audio/1405.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP audio/1405.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP audio/1405.wav" type="audio/wav"></audio></td>
+    </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 6</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural audio/1412.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR audio/1412.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP audio/1412.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP audio/1412.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+<br>
+<table align = "center" style="text-align: center;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-5">Sample 7</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+  </tr>     
+  <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/natural audio/1928.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/RAAR audio/1928.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/NSPP audio/1928.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="wavs/tab4/SP-NSPP audio/1928.wav" type="audio/wav"></audio></td>
+  </tr>
+</table>
+</section>
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
