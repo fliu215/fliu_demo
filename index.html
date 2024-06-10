@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SP-NSPP</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="css/bulma-slider.min.css">
+  <link rel="stylesheet" href="css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="js/fontawesome.all.min.js"></script>
+  <script src="js/bulma-carousel.min.js"></script>
+  <script src="js/bulma-slider.min.js"></script>
+  <script src="js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Stage-Wise and Prior-Aware Neural Speech Phase Prediction with Phase Adversarial Training</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <center>Anonymous submission to SLT 2024 </center>
+              <!-- <span class="author-block">
+                <a>Ye-Xin Lu</a>,</span>
+              <span class="author-block">
+                <a href="http://staff.ustc.edu.cn/~yangai" target="_blank">Yang Ai</a>,</span>
+              <span class="author-block">
+                <a>Zheng-Yan Sheng</a>,</span>
+              <span class="author-block">
+                <a href="http://staff.ustc.edu.cn/~zhling" target="_blank">Zhen-Hua Ling</a>,</span> -->
+            </div>
+
+            <!-- <div class="is-size-5 publication-authors">
+              <span class="author-block">National Engineering Research Center of Speech and Language Information Processing <br> University of Science and Technology of China<br></span>
+            </div> -->
+
+            <!-- <div class="column has-text-centered">
+              <div class="publication-links"> -->
+                <!--                   Code Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://github.com/yxlu-0102/AP-BWE" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+                </span> -->
+                <!--                   ArXiv Link -->
+                <!-- <span class="link-block">
+                  <a href="" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                  </a>
+                </span>
+              </div>
+            </div> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper proposes a novel Stage-wise and Prior-aware Neural Speech Phase Prediction (SP-NSPP) model, which predicts the phase spectrum from input amplitude spectrum by two-stage neural networks. 
+            In the initial prior-construction stage, we preliminarily predict a prior phase spectrum with coarse quality from the amplitude spectrum. 
+            The subsequent refinement stage transforms the amplitude spectrum into a refined and high-quality phase spectrum conditioned on the prior phase. 
+            Networks in both stages use ConvNeXt v2 blocks as the backbone and adopt adversarial training for phase by innovatively introducing a phase spectrum discriminator (PSD). 
+            To further improve the continuity of the refined phase, we also incorporate the time-frequency intergrated difference (TFID) loss in the refinement stage. 
+            Experimental results confirm that, compared to iterative phase estimation algorithms, our proposed SP-NSPP does not require multiple rounds of staged iterations, resulting in higher generation efficiency. 
+            Compared to neural network-based no-prior phase prediction methods, the proposed SP-NSPP achieves higher phase prediction accuracy, thanks to the introduction of the coarse phase priors and diverse training criteria.  
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<br>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">I. Analysis-synthesis tasks on different methods with sampling rate of 16kHz</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h3 class="title is-5">Sample 1</h3>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Natural</b></th>
+      <td style="text-align: center;"><b>GLA</b></th>
+      <td style="text-align: center;"><b>RAAR</b></th>
+      <td style="text-align: center;"><b>vMDNN</b></th>
+      <td style="text-align: center;"><b>NSPP</b></th>
+      <td style="text-align: center;"><b>SP-NSPP</b></th>
+      <!-- <td style="text-align: center;"><b>MS-BWE (Four Stages)</b></th> -->
+    </tr>
+
+    <!-- <tr>
+    <td><img src="samples/BWE_flexible/8kto48k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/nuwave2.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/udm+.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/mdctgan.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto48k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr> -->
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/wideband.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/sinc.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/nuwave2.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/udm+.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/mdctgan.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/ap-bwe.wav" type="audio/wav"></audio></td>
+    <!-- <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto48k/ms-bwe.wav" type="audio/wav"></audio></td> -->
+    </tr>
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">12 kHz to 48 kHz</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>NU-Wave 2</b></th>
+      <td style="text-align: center;"><b>UDM+</b></th>
+      <td style="text-align: center;"><b>mdctGAN</b></th>
+      <td style="text-align: center;"><b>AP-BWE</b></th>
+      <td style="text-align: center;"><b>MS-BWE (Three Stages)</b></th>
+    </tr>
+    <tr>
+      <td><img src="samples/BWE_flexible/12kto48k/wideband.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/sinc.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/nuwave2.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/udm+.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/mdctgan.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/ap-bwe.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_flexible/12kto48k/ms-bwe.png" width="200px" height="128px"></td>
+      </tr>
+  
+      <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto48k/wideband.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto48k/sinc.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto48k/nuwave2.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto48k/udm+.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto48k/mdctgan.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto48k/ap-bwe.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto48k/ms-bwe.wav" type="audio/wav"></audio></td>
+      </tr>
+    </table>
+    <br>
+    <table align = "center" style="text-align: center;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-centered">
+            <h2 class="title is-5">16 kHz to 48 kHz</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <tr>
+        <td style="text-align: center;"><b>Wideband</b></th>
+        <td style="text-align: center;"><b>Sinc</b></th>
+        <td style="text-align: center;"><b>NU-Wave 2</b></th>
+        <td style="text-align: center;"><b>UDM+</b></th>
+        <td style="text-align: center;"><b>mdctGAN</b></th>
+        <td style="text-align: center;"><b>AP-BWE</b></th>
+        <td style="text-align: center;"><b>MS-BWE (Two Stages)</b></th>
+      </tr>
+      <tr>
+        <td><img src="samples/BWE_flexible/16kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/nuwave2.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/udm+.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/mdctgan.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/ap-bwe.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/16kto48k/ms-bwe.png" width="200px" height="128px"></td>
+        </tr>
+    
+        <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto48k/wideband.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto48k/sinc.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto48k/nuwave2.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto48k/udm+.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto48k/mdctgan.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto48k/ap-bwe.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto48k/ms-bwe.wav" type="audio/wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">24 kHz to 48 kHz</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+          <td style="text-align: center;"><b>Wideband</b></th>
+          <td style="text-align: center;"><b>Sinc</b></th>
+          <td style="text-align: center;"><b>NU-Wave 2</b></th>
+          <td style="text-align: center;"><b>UDM+</b></th>
+          <td style="text-align: center;"><b>mdctGAN</b></th>
+          <td style="text-align: center;"><b>AP-BWE</b></th>
+          <td style="text-align: center;"><b>MS-BWE (One Stage)</b></th>
+        </tr>
+        <tr>
+        <td><img src="samples/BWE_flexible/24kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/nuwave2.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/udm+.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/mdctgan.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ap-bwe.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_flexible/24kto48k/ms-bwe.png" width="200px" height="128px"></td>
+        </tr>
+    
+        <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/24kto48k/wideband.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/24kto48k/sinc.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/24kto48k/nuwave2.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/24kto48k/udm+.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/24kto48k/mdctgan.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/24kto48k/ap-bwe.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/24kto48k/ms-bwe.wav" type="audio/wav"></audio></td>
+        </tr>
+  </table>
+</section>
+
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">II. Audio Samples with Flexible Sampling Rates</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">8 kHz to 12 kHz</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>mdctGAN</b></th>
+      <td style="text-align: center;"><b>AP-BWE</b></th>
+      <td style="text-align: center;"><b>MS-BWE (One Stage)</b></th>
+    </tr>
+
+    <tr>
+    <td><img src="samples/BWE_flexible/8kto12k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto12k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto12k/mdctGAN.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto12k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto12k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto12k/wideband.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto12k/sinc.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto12k/mdctGAN.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto12k/ap-bwe.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto12k/ms-bwe.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">8 kHz to 16 kHz</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>mdctGAN</b></th>
+      <td style="text-align: center;"><b>AP-BWE</b></th>
+      <td style="text-align: center;"><b>MS-BWE (Two Stages)</b></th>
+    </tr>
+
+    <tr>
+    <td><img src="samples/BWE_flexible/8kto16k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto16k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto16k/mdctGAN.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto16k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto16k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto16k/wideband.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto16k/sinc.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto16k/mdctGAN.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto16k/ap-bwe.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto16k/ms-bwe.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">8 kHz to 24 kHz</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>mdctGAN</b></th>
+      <td style="text-align: center;"><b>AP-BWE</b></th>
+      <td style="text-align: center;"><b>MS-BWE (Three Stages)</b></th>
+    </tr>
+
+    <tr>
+    <td><img src="samples/BWE_flexible/8kto24k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto24k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto24k/mdctGAN.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto24k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/8kto24k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto24k/wideband.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto24k/sinc.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto24k/mdctGAN.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto24k/ap-bwe.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/8kto24k/ms-bwe.wav" type="audio/wav"></audio></td>
+    </tr>
+  </table>
+  <br>
+  </table>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">12 kHz to 16 kHz</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>mdctGAN</b></th>
+      <td style="text-align: center;"><b>AP-BWE</b></th>
+      <td style="text-align: center;"><b>MS-BWE (One Stage)</b></th>
+    </tr>
+
+    <tr>
+    <td><img src="samples/BWE_flexible/12kto16k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto16k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto16k/mdctGAN.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto16k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto16k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto16k/wideband.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto16k/sinc.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto16k/mdctGAN.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto16k/ap-bwe.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto16k/ms-bwe.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+  <br>
+  </table>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">12 kHz to 24 kHz</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>mdctGAN</b></th>
+      <td style="text-align: center;"><b>AP-BWE</b></th>
+      <td style="text-align: center;"><b>MS-BWE (Two Stages)</b></th>
+    </tr>
+
+    <tr>
+    <td><img src="samples/BWE_flexible/12kto24k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto24k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto24k/mdctGAN.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto24k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/12kto24k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto24k/wideband.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto24k/sinc.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto24k/mdctGAN.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto24k/ap-bwe.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/12kto24k/ms-bwe.wav" type="audio/wav"></audio></td>
+    </tr>
+  </table>
+  <br>
+  </table>
+  <table align = "center" style="text-align: center;">
+
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">16 kHz to 24 kHz</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>mdctGAN</b></th>
+      <td style="text-align: center;"><b>AP-BWE</b></th>
+      <td style="text-align: center;"><b>MS-BWE (One Stage)</b></th>
+    </tr>
+
+    <tr>
+    <td><img src="samples/BWE_flexible/16kto24k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/16kto24k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/16kto24k/mdctGAN.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/16kto24k/ap-bwe.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_flexible/16kto24k/ms-bwe.png" width="200px" height="128px"></td>
+    </tr>
+
+    <tr>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto24k/wideband.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto24k/sinc.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto24k/mdctGAN.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto24k/ap-bwe.wav" type="audio/wav"></audio></td>
+    <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_flexible/16kto24k/ms-bwe.wav" type="audio/wav"></audio></td>
+    </tr>
+
+  </table>
+</section>
+<hr>
+<section class="hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-centered">
+        <h2 class="title is-3">III. Audio Samples of Different Training Strategies</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <table align = "center" style="text-align: center;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-centered">
+          <h2 class="title is-5">8 kHz to 48 kHz (Four-Stage Generation)</h2>
+        </div>
+      </div>
+    </div>
+    <br>
+    <tr>
+      <td style="text-align: center;"><b>Wideband</b></th>
+      <td style="text-align: center;"><b>Sinc</b></th>
+      <td style="text-align: center;"><b>Never Sampling</b></th>
+      <td style="text-align: center;"><b>Always Sampling</b></th>
+      <td style="text-align: center;"><b>Scheduled Sampling</b></th>
+    </tr>
+
+    <tr>
+    <td><img src="samples/BWE_analysis/8kto48k/wideband.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_analysis/8kto48k/sinc.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_analysis/8kto48k/ms-bwe_NS.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_analysis/8kto48k/ms-bwe_AS.png" width="200px" height="128px"></td>
+    <td><img src="samples/BWE_analysis/8kto48k/ms-bwe_SS.png" width="200px" height="128px"></td>
+    </tr>
+    <tr>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/8kto48k/wideband.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/8kto48k/sinc.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/8kto48k/ms-bwe_NS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/8kto48k/ms-bwe_AS.wav" type="audio/wav"></audio></td>
+      <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/8kto48k/ms-bwe_SS.wav" type="audio/wav"></audio></td>
+      </tr>
+    </table>
+    <br>
+    <table align = "center" style="text-align: center;">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-centered">
+            <h2 class="title is-5">12 kHz to 48 kHz (Three-Stage Generation)</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <tr>
+        <td style="text-align: center;"><b>Wideband</b></th>
+        <td style="text-align: center;"><b>Sinc</b></th>
+        <td style="text-align: center;"><b>Never Sampling</b></th>
+        <td style="text-align: center;"><b>Always Sampling</b></th>
+        <td style="text-align: center;"><b>Scheduled Sampling</b></th>
+      </tr>
+      <tr>
+      <td><img src="samples/BWE_analysis/12kto48k/wideband.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_analysis/12kto48k/sinc.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_analysis/12kto48k/ms-bwe_NS.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_analysis/12kto48k/ms-bwe_AS.png" width="200px" height="128px"></td>
+      <td><img src="samples/BWE_analysis/12kto48k/ms-bwe_SS.png" width="200px" height="128px"></td>
+      </tr>
+      <tr>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/12kto48k/wideband.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/12kto48k/sinc.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/12kto48k/ms-bwe_NS.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/12kto48k/ms-bwe_AS.wav" type="audio/wav"></audio></td>
+        <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/12kto48k/ms-bwe_SS.wav" type="audio/wav"></audio></td>
+        </tr>
+      </table>
+      <br>
+      <table align = "center" style="text-align: center;">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-centered">
+              <h2 class="title is-5">16 kHz to 48 kHz (Two-Stage Generation)</h2>
+            </div>
+          </div>
+        </div>
+        <br>
+        <tr>
+          <td style="text-align: center;"><b>Wideband</b></th>
+          <td style="text-align: center;"><b>Sinc</b></th>
+          <td style="text-align: center;"><b>Never Sampling</b></th>
+          <td style="text-align: center;"><b>Always Sampling</b></th>
+          <td style="text-align: center;"><b>Scheduled Sampling</b></th>
+        </tr>
+        <tr>
+        <td><img src="samples/BWE_analysis/16kto48k/wideband.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_analysis/16kto48k/sinc.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_analysis/16kto48k/ms-bwe_NS.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_analysis/16kto48k/ms-bwe_AS.png" width="200px" height="128px"></td>
+        <td><img src="samples/BWE_analysis/16kto48k/ms-bwe_SS.png" width="200px" height="128px"></td>
+        </tr>
+        <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/16kto48k/wideband.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/16kto48k/sinc.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/16kto48k/ms-bwe_NS.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/16kto48k/ms-bwe_AS.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/16kto48k/ms-bwe_SS.wav" type="audio/wav"></audio></td>
+        </tr>
+        </table>
+        <br>
+        <table align = "center" style="text-align: center;">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-centered">
+                <h2 class="title is-5">24 kHz to 48 kHz (One-Stage Generation)</h2>
+              </div>
+            </div>
+          </div>
+          <br>
+          <tr>
+            <td style="text-align: center;"><b>Wideband</b></th>
+            <td style="text-align: center;"><b>Sinc</b></th>
+            <td style="text-align: center;"><b>Never Sampling</b></th>
+            <td style="text-align: center;"><b>Always Sampling</b></th>
+            <td style="text-align: center;"><b>Scheduled Sampling</b></th>
+          </tr>      
+          <tr>
+          <td><img src="samples/BWE_analysis/24kto48k/wideband.png" width="200px" height="128px"></td>
+          <td><img src="samples/BWE_analysis/24kto48k/sinc.png" width="200px" height="128px"></td>
+          <td><img src="samples/BWE_analysis/24kto48k/ms-bwe_NS.png" width="200px" height="128px"></td>
+          <td><img src="samples/BWE_analysis/24kto48k/ms-bwe_AS.png" width="200px" height="128px"></td>
+          <td><img src="samples/BWE_analysis/24kto48k/ms-bwe_SS.png" width="200px" height="128px"></td>
+          </tr>
+      
+          <tr>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/24kto48k/wideband.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/24kto48k/sinc.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/24kto48k/ms-bwe_NS.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/24kto48k/ms-bwe_AS.wav" type="audio/wav"></audio></td>
+          <td><audio controls="" style='display: inline-block; width: 200px; height: 50px;'><source src="samples/BWE_analysis/24kto48k/ms-bwe_SS.wav" type="audio/wav"></audio></td>
+          </tr>
+  </table>
+</section>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
